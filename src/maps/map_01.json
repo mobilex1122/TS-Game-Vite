@@ -1,5 +1,5 @@
 { "compressionlevel":-1,
- "height":16,
+ "height":17,
  "infinite":true,
  "layers":[
         {
@@ -113,7 +113,7 @@
                 {
                  "height":80,
                  "id":2,
-                 "name":"f1",
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,

@@ -52,7 +52,7 @@ const ready = (canvas: EngineRender) => {
     map_01.layers.forEach((layer) => {
         if (layer.objects && layer.class == "coll") {
             layer.objects.forEach((coll)=> {
-                eng.world.createRect(coll.name,coll.x*2,coll.y*2,coll.width*2,coll.height*2,"transparent")
+                eng.world.createRect(coll.id.toString(),coll.x*2,coll.y*2,coll.width*2,coll.height*2,"transparent")
             })
         }
     })

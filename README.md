@@ -41,3 +41,9 @@ Game made in TS with custom made game engine that's being developed at the same 
 - [ ] Render Distance (Don't render things that are not on screen)
 - [ ] Sound
 - [ ] Textures
+
+## Limitations (as for version b3)
+
+- Map limited to chunks (all chunks are rendered at the same time)
+- Tileset limited to 16x16 (Hardcoded)
+- Chunks limited to 16x16 (Hardcoded)
