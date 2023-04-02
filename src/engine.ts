@@ -3,6 +3,11 @@
     
 // }
 
+export interface TileMapMapping{
+    [key: number]: number[];
+}
+
+
 export interface RenderObject{
     type: string,
     x: number,
