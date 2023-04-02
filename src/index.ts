@@ -151,7 +151,7 @@ const update = (render:EngineRender,input:EngineInput) => {
     //tilemap size 22
     
     let tiles = new Image()
-    tiles.src = "/assets/tiles.png"
+    tiles.src = "./assets/tiles.png"
 
     map_01.layers.forEach((layer) => {
         if (layer.chunks) {
