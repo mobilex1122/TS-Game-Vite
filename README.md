@@ -38,8 +38,10 @@ Game made in TS with custom made game engine that's being developed at the same 
 
 - [x] Collisions
 - [x] Object Management
-- [ ] Render Distance (Don't render things that are not on screen)
+- [x] Render Distance (Don't render things that are not on screen)
 - [ ] Sound
+- [ ] Animated character
+- [ ] Bigger resolution (right now 500x500)
 - [x] Textures
 
 ## Limitations (as for version b3)
