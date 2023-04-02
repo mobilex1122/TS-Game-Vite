@@ -9,9 +9,9 @@ Game made in TS with custom made game engine that's being developed at the same 
 ### Option 1: Online version (Easy)
 
 - Go to [releases](https://github.com/mobilex1122/TS-Game-Vite/releases) and find online version link
-- Alternatively go to `https://mobilex1122.eu/games/ts-game/<relase tag>/`
+- Alternatively go to `https://mobilex1122.eu/games/ts-game-vite/<relase tag>/`
   
-  Example for tag b2: `https://mobilex1122.eu/games/ts-game/b2/`
+  Example for tag b2: `https://mobilex1122.eu/games/ts-game-vite/b2/`
 
 ### Option 2: Local play (Advanced)
 
