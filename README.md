@@ -40,7 +40,7 @@ Game made in TS with custom made game engine that's being developed at the same 
 - [x] Object Management
 - [ ] Render Distance (Don't render things that are not on screen)
 - [ ] Sound
-- [ ] Textures
+- [x] Textures
 
 ## Limitations (as for version b3)
 
