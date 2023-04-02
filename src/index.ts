@@ -156,7 +156,7 @@ const update = (render:EngineRender,input:EngineInput) => {
 
     
     
-    const loadchunk = (chunk) => {
+    const loadchunk = (chunk: {data: number[]; height: number; width: number; x: number; y: number;}) => {
         chunk.data.forEach((tile,position)=> {
             if (tile > 0) {
                 const x = position % 16;
