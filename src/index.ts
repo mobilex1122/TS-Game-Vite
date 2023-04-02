@@ -52,7 +52,7 @@ const ready = (canvas: EngineRender) => {
     map_01.layers.forEach((layer) => {
         if (layer.objects && layer.class == "coll") {
             layer.objects.forEach((coll)=> {
-                eng.world.createRect(coll.id.toString(),coll.x*2,coll.y*2,coll.width*2,coll.height*2,"transparent")
+                eng.world.createRect(coll.id.toString(),coll.x*2,coll.y*2,coll.width*2,coll.height*2,"transparent", {obj:coll.type})
             })
         }
     })
@@ -90,8 +90,9 @@ const update = (render:EngineRender,input:EngineInput) => {
     Object.keys(eng.world.list).forEach((key) => {
         let obj = eng.world.getObject(key)
         let cl = eng.collisions.advancedrect(player,obj)
+        
         //let sensitivity = 0
-        if (cl.side =="up" && pvel.y <= 0) {
+        if (cl.side =="up" && pvel.y <= 0 && obj.extra?.obj != "platform") {
             player.y += cl.depth
             pvel.y = 0
         }
@@ -153,26 +154,58 @@ const update = (render:EngineRender,input:EngineInput) => {
     let tiles = new Image()
     tiles.src = "./assets/tiles.png"
 
-    map_01.layers.forEach((layer) => {
-        if (layer.chunks) {
-            layer.chunks.forEach((chunk) => {
-                chunk.data.forEach((tile,position)=> {
-                    if (tile > 0) {
-                        const x = position % 16;
-                        const y = Math.floor(position / 16);
-                        let tileimgpos = {x: tmapping[tile][0], y: tmapping[tile][1]};
-                        render.tile(
-                            x + chunk.x + tiledpos.x,
-                            y + chunk.y + tiledpos.y,
-                            tileimgpos.x,
-                            tileimgpos.y,
-                            16,
-                            tiles
-                        )
-                    }
+    
+    
+    const loadchunk = (chunk) => {
+        chunk.data.forEach((tile,position)=> {
+            if (tile > 0) {
+                const x = position % 16;
+                const y = Math.floor(position / 16);
+                let tileimgpos = {x:0,y:0}
+                if (tmapping[tile]) {
+                    tileimgpos = {x: tmapping[tile][0], y: tmapping[tile][1]};
+                } else {
+                    console.error("Tile '" + tile + "' is not defined in mapping");
                     
-                })
-            })  
+                }
+
+                render.tile(
+                    x + chunk.x + tiledpos.x,
+                    y + chunk.y + tiledpos.y,
+                    tileimgpos.x,
+                    tileimgpos.y,
+                    16,
+                    tiles
+                )
+            }
+            
+        }) 
+    }
+
+
+    map_01.layers.forEach((layer) => {
+        
+        if (layer.chunks) {
+
+            
+
+            layer.chunks.forEach((chunk) => {
+                if (-tiledpos.x > chunk.x - 16 && -tiledpos.x < chunk.x + 32) {
+                    if (-tiledpos.y > chunk.y - 16 && -tiledpos.y < chunk.y + 32) {
+                        loadchunk(chunk)
+                    }
+                }
+                
+
+                
+            
+            })
+
+
+                     
+                
+            
+            
         }
         
         

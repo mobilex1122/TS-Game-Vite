@@ -14,7 +14,8 @@ export interface RenderObject{
     y: number,
     w: number,
     h: number,
-    color: string | CanvasGradient | CanvasPattern
+    color: string | CanvasGradient | CanvasPattern,
+    extra?: {[key: string]: any}
 }
 
 
@@ -122,12 +123,12 @@ export default class Engine {
 
     object = {
         list: this.objects,
-        createRect: (name:string,x:number,y:number,w:number,h:number,color: string | CanvasGradient | CanvasPattern) => {
+        createRect: (name:string,x:number,y:number,w:number,h:number,color: string | CanvasGradient | CanvasPattern, extra?: {[key: string]: any}) => {
             if (this.objects[name]) {
                 console.error("Name '" + name + "' already exists")
                 return null
             } else {
-                this.objects[name] = {type:"rect",x,y,w,h,color}
+                this.objects[name] = {type:"rect",x,y,w,h,color,extra}
                 return this.objects[name]
             }
         },
@@ -141,12 +142,12 @@ export default class Engine {
 
     world = {
         list: this.worlddata.objects,
-        createRect: (name:string,x:number,y:number,w:number,h:number,color: string | CanvasGradient | CanvasPattern) => {
+        createRect: (name:string,x:number,y:number,w:number,h:number,color: string | CanvasGradient | CanvasPattern,extra?: {[key: string]: any}) => {
             if (this.worlddata.objects[name]) {
                 console.error("Name '" + name + "' already exists")
                 return null
             } else {
-                this.worlddata.objects[name] = {type:"rect",x,y,w,h,color}
+                this.worlddata.objects[name] = {type:"rect",x,y,w,h,color,extra}
                 return this.worlddata.objects[name] 
             }
             
