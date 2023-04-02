@@ -42,8 +42,13 @@ const player_speed = 5
 // eng.world.createRect("f4",800,350,280,50,"green")
 // eng.world.createRect("mainf",-200,700,1500,50,"red")
 // eng.world.createRect("f5",-200,600,100,25,"blue")
+let bg = new Image()
+bg.src = "./assets/bg/Brown.png"
+let tiles = new Image()
+tiles.src = "./assets/tiles.png"
 
-
+let playerch = new Image()
+playerch.src = "./assets/player/idle.png"
 
 const ready = (canvas: EngineRender) => {
     console.log("ready");
@@ -115,26 +120,26 @@ const update = (render:EngineRender,input:EngineInput) => {
     }
     )
 
-    if (player.x < 50) {
-        player.x = 50
+    if (player.x < 150) {
+        player.x = 150
         eng.world.moveWorld(-pvel.x,0)
         tiledpos.x -= pvel.x/32
     } 
 
-    if (player.x +player.w > 450) {
-        player.x  = 450-player.w
+    if (player.x +player.w > 350) {
+        player.x  = 350-player.w
         eng.world.moveWorld(-pvel.x,0)
         tiledpos.x -= pvel.x/32
     }
 
-    if (player.y < 50) {
-        player.y = 50
+    if (player.y < 100) {
+        player.y = 100
         eng.world.moveWorld(0,-pvel.y)
         tiledpos.y -= pvel.y/32
     } 
 
-    if (player.y + player.h > 450) {
-        player.y  = 450-player.h
+    if (player.y + player.h > 400) {
+        player.y  = 400-player.h
         eng.world.moveWorld(0,-pvel.y)
         tiledpos.y -= pvel.y/32
     } 
@@ -149,10 +154,20 @@ const update = (render:EngineRender,input:EngineInput) => {
 
 
     render.fillRect(0,0,render.canvas.width, render.canvas.height,"black")
+    
+    for (let i = -1; i < 6;i++) {
+        for (let j = -1; j < 6;j++) {
+            let xoff = Math.floor(wrapInRange(tiledpos.x,100))
+            let yoff =  Math.floor(wrapInRange(tiledpos.y,100))
+            render.drawImage((i*100) + xoff,(j*100) + yoff,100,100,bg)
+        }
+        
+    }
+    
+
     //tilemap size 22
     
-    let tiles = new Image()
-    tiles.src = "./assets/tiles.png"
+    
 
     
     
@@ -186,26 +201,13 @@ const update = (render:EngineRender,input:EngineInput) => {
     map_01.layers.forEach((layer) => {
         
         if (layer.chunks) {
-
-            
-
             layer.chunks.forEach((chunk) => {
                 if (-tiledpos.x > chunk.x - 16 && -tiledpos.x < chunk.x + 32) {
                     if (-tiledpos.y > chunk.y - 16 && -tiledpos.y < chunk.y + 32) {
                         loadchunk(chunk)
                     }
                 }
-                
-
-                
-            
             })
-
-
-                     
-                
-            
-            
         }
         
         
@@ -218,11 +220,15 @@ const update = (render:EngineRender,input:EngineInput) => {
     })
 
     render.objectRect(player)
-    // DO NOT UNCOMMENT! RAM killer (commented in engine.js:81)
-    // eng.tiled.loadfullTilemap(tiledpos,tiles,map_01,16)
+    // render.drawSpritesheet(player.x,player.y,player.w,player.h,128,0,32,32,playerch)
 }
 
-
+function wrapInRange(value: number,limit: number): number {
+    const rangeLength = limit; // the length of the range, including 0 and 22
+    const wrappedValue = ((value % rangeLength) + rangeLength) % rangeLength; // wrap the value within the range
+    return wrappedValue;
+}
+     
         
 
 // const input = (canvas: CanvasRenderingContext2D, event: KeyboardEvent) => {

@@ -23,6 +23,8 @@ export interface EngineRender {
     fillRect: (x: number,y: number,w: number,h: number, color:string | CanvasGradient | CanvasPattern) => void,
     tile: (x: number,y: number,tileX: number,tileY: number, size:number,tileimage: HTMLImageElement) => void,
     objectRect: (object:RenderObject) => void,
+    drawImage: (x: number,y: number,w: number,h: number, img: HTMLImageElement) => void,
+    drawSpritesheet: (x: number,y: number,w: number,h: number,sptitex: number,sptitey: number,sptritesizex:number,sptritesizey:number, img: HTMLImageElement) => void,
     canvas: {width: number, height: number}
 }
 
@@ -62,6 +64,12 @@ export default class Engine {
             objectRect: (object:RenderObject) => {
                 this.canvas.fillStyle = object.color
                 this.canvas.fillRect(object.x,object.y,object.w,object.h)
+            },
+            drawImage: (x: number,y: number,w: number,h: number, img: HTMLImageElement) => {
+                this.canvas.drawImage(img,x,y,w,h)
+            },
+            drawSpritesheet: (x: number,y: number,w: number,h: number,sptitex: number,sptitey: number,sptritesizex:number,sptritesizey:number, img: HTMLImageElement) => {
+                this.canvas.drawImage(img,sptitex,sptitey,sptritesizex,sptritesizey,x,y,w,h)
             },
             canvas: {
                 width: this.canvas.canvas.width,
